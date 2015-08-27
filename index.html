@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang='en'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+
+  <!-- google fonts -->
+  <link href='//fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
+  <meta charset='utf-8'>
+
+  <!-- bootstrap -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <!--Leaflet css-->
+  <link rel="stylesheet" href="css/leaflet.css" />
+
+  <title>APP</title>
+
+  <style>
+    html {
+      -webkit-text-size-adjust: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      color: black;
+    }
+
+    h1 {
+      margin: 0 0 6px 0;
+      font-size: 32px;
+      color: black;
+    }
+
+    h2 {
+      color: #666;
+      font-size: 22px;
+      margin: 0 0 10px 0;
+    }
+
+    .footnotes h4 {
+      margin: 2px 0 7px 0;
+      color: #666;
+      font-size: 11px;
+    }
+
+    .footnotes p,
+    .footer p {
+      margin: 2px 0 0 0;
+      font-size: 11px;
+      line-height: 1.3;
+      color: #808080;
+    }
+
+    a,
+    a:link,
+    a:visited {
+      color: #4774CC;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:active {
+      opacity: 0.7;
+    }
+
+    table,
+    th {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id='container' class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>TITLE</h1>
+        <h2>SUBHEAD</h2>
+        <p>FIRST GRAF</p>
+      </div>
+    </div>
+
+    <div class="row" id="ractive_template">
+      <!-- TEMPLATE -->
+      <script id='template' type='text/ractive'>
+        <svg width='100%' height='800'>
+          <g transform="translate(0,0)">
+          <text x='{{ (daySize * 7)/2 }}' y='12' text-anchor="middle">May, 2015 </text>
+            <!--<rect x={{xscale( {{day}} )}}> -->
+          {{#each may}}
+             <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="transparent" stroke-width="2" />
+            <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em">{{ day.getDate() }}</text>
+          {{/each}}
+        </g>
+
+        </svg>
+
+    {{#each month}}
+      <p>{{day}}</p>
+    {{/each}}
+
+      </script>
+    </div>
+
+
+    <div class="footnotes">
+      <h4>Notes:</h4>
+    </div>
+
+    <div class="footer">
+      <p>Source:</p>
+      <p>Credit: <a href="http://www.twitter.com/scottpham">Scott Pham</a>/NBC Bay Area</p>
+    </div>
+
+  </div>
+
+
+
+  <!-- JS LIBRARIES -->
+  <!-- ractive -->
+  <script src='http://cdn.ractivejs.org/edge/ractive.min.js'></script>
+  <!--jquery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <!--  bootstrap -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+
+  <script src="//localhost:35729/livereload.js"></script>
+  <script src="main.js"></script>
+
+</body>
+
+</html>
