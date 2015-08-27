@@ -7,13 +7,37 @@ function getDays(year, month){
   return result.getDate();
 }
 
+
+
+//write array of days
 //javascript days are 1 based
-for(i = 1; i < getDays(2015, 4); i++){
-  //get datetime for day
-  var day = new Date(2015, 4, i);
-  var element = {"day": day};
-  mayDays.push(element);
+  for(i = 1; i < getDays(2015, 4); i++){
+    //get datetime for day
+    var day = new Date(2015, 4, i);
+    var element = {"day": day};
+    mayDays.push(element);
+  }
+
+function iterDays(year, monthNum, monthName){
+  for(i = 1; i < getDays(year, monthNum); i++){
+      //day of month
+      var day = new Date(year, monthNum, i);
+      //element of an array
+      var element = {"day": day};
+      monthName.push(element);
+  }
 }
+
+var y2015 = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+iterDays(2015, 7, (August = new Array));
+iterDays(2015, 4, (May = new Array));
+
+//var year = ["September":8, "October":9, "November":10];
+
+//for(i=0)
+
+
 
 var ractive = new Ractive({
     // The `el` option can be a node, an ID, or a CSS selector.
@@ -23,7 +47,9 @@ var ractive = new Ractive({
     decorators: {},
     // JSON CAN GO HERE
     data: {
-      may: mayDays,
+      may: May,
+      August: August,
+      year: 2015,
       daySize: 40,
       xscale: function(day){
         var dayofmonth = day.getDate();
@@ -39,12 +65,9 @@ var ractive = new Ractive({
     },
     // these properties depend on other properties
     computed: {
-        // COMPUTED_PROPERTY: function() {
-        //     return ("DATA");
-        // }
     },
     oninit: function() {
-        console.log(mayDays);
+        console.log(this.get('may'));
     }
 });
 
