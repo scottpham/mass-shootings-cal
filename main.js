@@ -62,7 +62,6 @@ var ractive = new Ractive({
     //color scale for shootings
     colorScale: function(shootings){
       var scale = chroma.scale(['lightgray', 'maroon']).domain([0,4]);
-      console.log(scale(shootings));
       return scale(shootings);
     },
     //daySize: 40,
@@ -102,7 +101,6 @@ var ractive = new Ractive({
   },
   onrender: function() {
     this.set('width', $('.svg').width());
-    console.log(this.get('daySize'));
   }
 });
 
