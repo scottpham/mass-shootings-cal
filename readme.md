@@ -2,7 +2,7 @@ I saw Chris Ingraham's [excellent calendar viz](http://www.washingtonpost.com/ne
 
 Data from the [Mass Shooting Tracker](http://shootingtracker.com/wiki/Mass_Shootings_in_2015).
 
-
+[Live demo here.](http://scottpham.github.io/mass-shootings-cal)
 
 
 
