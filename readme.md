@@ -1,5 +1,8 @@
-1. Change references to app name in:
-  - package.json
-  - gruntfile.js
-2. Run `npm install` to install packages
-3. Run grunt to start live-reload server
+I saw Chris Ingraham's [excellent calendar viz](http://www.washingtonpost.com/news/wonkblog/wp/2015/07/27/why-its-never-the-right-time-to-discuss-gun-violence/) in the Washington Post and thought I could probably make an interactive version.
+
+Data from the [Mass Shooting Tracker](http://shootingtracker.com/wiki/Mass_Shootings_in_2015).
+
+
+
+
+
