@@ -87,6 +87,21 @@
 
     }
 
+    .svg {
+      width: 30%
+    }
+    @media (max-width: 905px){
+      .svg {
+        width: 50%;
+      }
+    }
+
+    @media (max-width: 505px){
+      .svg{
+        width: 100%;
+      }
+    }
+
   </style>
 </head>
 
@@ -107,8 +122,9 @@
 
       {{#each y15}}
       {{#with month}}
-        <div class="col-lg-4 col-sm-6 col-xs-12">
-        <svg width='100%' height='350'>
+        {{ console.log(@index) }}
+      {{#if @index < 8}}
+        <svg class='svg' width='30%' height='{{svgHeight}}'>
           <g transform="translate(0,0)">
           //month title
           <text x='{{ (daySize * 7)/2 }}' y='1em' text-anchor="middle" class="monthTitle">{{name}}, 2015 </text>
@@ -116,17 +132,16 @@
             {{#each days}}
             //group the day and num
             <g transform="translate(0,0)" class="daybox">
-
               //day box
              <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="transparent" stroke-width="2" class="day" />
-            //day number
-            <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ day.getDate() }}</text>
+             //day number
+             <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ getShootings(day) }}</text>
 
             </g>
             {{/each}}
           </g>
         </svg>
-      </div>
+      {{/if}}
       {{/with}}
       {{/each}}
       </script>
@@ -144,8 +159,6 @@
 
   </div>
 
-
-
   <!-- JS LIBRARIES -->
   <!-- ractive -->
   <script src='http://cdn.ractivejs.org/edge/ractive.min.js'></script>
@@ -155,8 +168,11 @@
   <!--  bootstrap -->
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-
+  <!-- moment -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
   <script src="//localhost:35729/livereload.js"></script>
+
+  <script src="data/shootings.js"></script>
   <script src="main.js"></script>
 
 </body>
