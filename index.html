@@ -69,6 +69,24 @@
     th {
       text-align: center;
     }
+
+    .dayNumber {
+      fill: gray;
+   }
+
+    .daybox:hover > .dayNumber {
+      fill: white;
+    }
+
+    .daybox:hover > .day {
+      fill: lightsteelblue;
+    }
+
+    .monthTitle {
+      font-size: 18px;
+
+    }
+
   </style>
 </head>
 
@@ -86,22 +104,31 @@
     <div class="row" id="ractive_template">
       <!-- TEMPLATE -->
       <script id='template' type='text/ractive'>
-        <svg width='100%' height='800'>
+
+      {{#each y15}}
+      {{#with month}}
+        <div class="col-lg-4 col-sm-6 col-xs-12">
+        <svg width='100%' height='350'>
           <g transform="translate(0,0)">
-          <text x='{{ (daySize * 7)/2 }}' y='12' text-anchor="middle">May, 2015 </text>
-            <!--<rect x={{xscale( {{day}} )}}> -->
-          {{#each may}}
-             <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="transparent" stroke-width="2" />
-            <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em">{{ day.getDate() }}</text>
-          {{/each}}
-        </g>
+          //month title
+          <text x='{{ (daySize * 7)/2 }}' y='1em' text-anchor="middle" class="monthTitle">{{name}}, 2015 </text>
+            //calendar section
+            {{#each days}}
+            //group the day and num
+            <g transform="translate(0,0)" class="daybox">
 
+              //day box
+             <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="transparent" stroke-width="2" class="day" />
+            //day number
+            <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ day.getDate() }}</text>
+
+            </g>
+            {{/each}}
+          </g>
         </svg>
-
-    {{#each month}}
-      <p>{{day}}</p>
-    {{/each}}
-
+      </div>
+      {{/with}}
+      {{/each}}
       </script>
     </div>
 
