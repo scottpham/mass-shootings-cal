@@ -59,6 +59,12 @@ var ractive = new Ractive({
       //return a zero if there is no shooting for this date
       return shootings[date] ? shootings[date].shootings : 0;
     },
+    //color scale for shootings
+    colorScale: function(shootings){
+      var scale = chroma.scale(['lightgray', 'maroon']).domain([0,4]);
+      console.log(scale(shootings));
+      return scale(shootings);
+    },
     //daySize: 40,
     xscale: function(day) {
       //return a num 1 to 7

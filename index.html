@@ -64,16 +64,13 @@
     a:active {
       opacity: 0.7;
     }
-
     table,
     th {
       text-align: center;
     }
-
     .dayNumber {
       fill: gray;
    }
-
     .daybox:hover > .dayNumber {
       fill: white;
     }
@@ -81,12 +78,10 @@
     .daybox:hover > .day {
       fill: lightsteelblue;
     }
-
     .monthTitle {
       font-size: 18px;
 
     }
-
     .svg {
       width: 30%
     }
@@ -95,7 +90,6 @@
         width: 50%;
       }
     }
-
     @media (max-width: 505px){
       .svg{
         width: 100%;
@@ -133,8 +127,8 @@
             //group the day and num
             <g transform="translate(0,0)" class="daybox">
               //day box
-             <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="transparent" stroke-width="2" class="day" />
-             //day number
+             <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="{{ colorScale( getShootings(day)) }}" stroke-width="2" class="day" />
+             //shooting number
              <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ getShootings(day) }}</text>
 
             </g>
@@ -170,6 +164,10 @@
 
   <!-- moment -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+  <!-- chroma -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/chroma-js/1.1.1/chroma.min.js"></script>
+
   <script src="//localhost:35729/livereload.js"></script>
 
   <script src="data/shootings.js"></script>
