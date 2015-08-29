@@ -66,7 +66,6 @@ module.exports = function(grunt) {
   ]);
 
 
-
   //enable tasks
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-contrib-watch');

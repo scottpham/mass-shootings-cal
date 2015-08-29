@@ -75,6 +75,16 @@
     .daybox:hover > .day {
       fill: lightsteelblue;
     }
+
+    g.tip {
+      opacity: 0;
+    }
+
+    .dayNumber:hover + g.tip {
+      fill: green;
+      opacity: 1;
+    }
+
     .monthTitle {
       font-size: 19px;
       font-weight: bold;
@@ -94,6 +104,30 @@
       }
     }
 
+    .tip-text {
+      font-size: 16px;
+      fill: black;
+    }
+
+div.tip {
+    background: black;
+    position: fixed;
+    max-width: 8em;
+    text-align:center;
+    padding: 10px;
+    color: white;
+    opacity: 0;
+}
+
+div.tip::before {
+	width: 0;
+	height: 0;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-bottom: 500px solid black;
+  opacity: 1;
+}
+
   </style>
 </head>
 
@@ -111,23 +145,27 @@
       <!-- TEMPLATE -->
       <script id='template' type='text/ractive'>
 
+      <div class="tip">
+        YO HERE IS SOME TEXT
+      </div>
+
       {{#each y15}}
       {{#with month}}
 
       {{#if @index < 8}}
+
         <svg class='svg' width='30%' height='{{svgHeight}}'>
-          <g transform="translate(0,0)">
+          <g class="month" transform="translate(0,0)">
           //month title
           <text x='{{ (daySize * 7)/2 }}' y='1em' text-anchor="middle" class="monthTitle">{{name}} </text>
             //calendar section
             {{#each days}}
             //group the day and num
-            <g transform="translate(0,0)" class="daybox">
-              //day box
-             <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="{{ colorScale( getShootings(day)) }}" stroke-width="2" class="day" />
-             //shooting number
-             <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ getShootings(day) }}</text>
+            <g transform="translate(0,0)" class="daybox" on-mouseover="tooltip:{{day}}">
 
+             <rect  x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="{{ colorScale( getShootings(day)) }}" stroke-width="2" class="day" />
+             <!-- shooting number -->
+             <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ getShootings(day) }}</text>
             </g>
             {{/each}}
           </g>
@@ -152,7 +190,8 @@
 
   <!-- JS LIBRARIES -->
   <!-- ractive -->
-  <script src='http://cdn.ractivejs.org/edge/ractive.min.js'></script>
+  <script src='//cdn.ractivejs.org/edge/ractive.min.js'></script>
+
   <!--jquery -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

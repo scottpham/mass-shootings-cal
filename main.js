@@ -39,15 +39,9 @@ y2015.map(function(month) {
   year2015[monthNum] = mObject;
 });
 
-
-
 var ractive = new Ractive({
-  // The `el` option can be a node, an ID, or a CSS selector.
   el: '#ractive_template',
   template: '#template',
-  //declare decorators
-  decorators: {},
-  // JSON CAN GO HERE
   data: {
     y15: year2015,
     year: 2015,
@@ -106,6 +100,20 @@ var ractive = new Ractive({
 
 //proxy events
 //http://docs.ractivejs.org/latest/proxy-events
+ractive.on('tooltip', function(event, day){
+    var date = moment(day).format('M/D/YY');
+    var killed;
+    if( shootings[date] ){
+      killed = shootings[date].killed}
+    else {killed = 0;}
+
+    var x = event.node.getBoundingClientRect().left;
+    var y = event.node.getBoundingClientRect().bottom;
+
+    $('.tip').css({top: (y + 10), left: (x-5), opacity: 1 }).html("Killed: " + killed);
+    console.log(y);
+
+});
 
 $(window).resize(function(){
   ractive.set('width', $('.svg').width());
