@@ -52,26 +52,32 @@
       line-height: 1.3;
       color: #808080;
     }
+
     a,
     a:link,
     a:visited {
       color: #4774CC;
       text-decoration: none;
     }
+
     a:hover,
     a:active {
       opacity: 0.7;
     }
+
     table,
     th {
       text-align: center;
     }
+
     .dayNumber {
       fill: black;
-   }
+    }
+
     .daybox:hover > .dayNumber {
       fill: white;
     }
+
     .daybox:hover > .day {
       fill: lightsteelblue;
     }
@@ -90,16 +96,19 @@
       font-weight: bold;
       fill: gray;
     }
+
     .svg {
       width: 30%
     }
-    @media (max-width: 905px){
+
+    @media (max-width: 905px) {
       .svg {
         width: 50%;
       }
     }
-    @media (max-width: 505px){
-      .svg{
+
+    @media (max-width: 505px) {
+      .svg {
         width: 100%;
       }
     }
@@ -109,25 +118,28 @@
       fill: black;
     }
 
-div.tip {
-    background: black;
-    position: fixed;
-    max-width: 8em;
-    text-align:center;
-    padding: 10px;
-    color: white;
-    opacity: 0;
-}
+    div.tip {
+      background: black;
+      box-shadow: 0px 0px 10px #999;
+      position: fixed;
+      max-width: 8em;
+      text-align: center;
+      padding: 10px;
+      color: white;
+      opacity: 0;
+    }
 
-div.tip::before {
-	width: 0;
-	height: 0;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	border-bottom: 500px solid black;
-  opacity: 1;
-}
-
+  /*triangle*/
+    div.tip::before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      border: 0.6em solid transparent; /*narrowsness of triangle*/
+      position: absolute; /* not fixed */
+      left: 40%;
+      top: -17px; /*height */
+      border-bottom: 10px solid #000; /*tallness*/
+    }
   </style>
 </head>
 
@@ -145,34 +157,26 @@ div.tip::before {
       <!-- TEMPLATE -->
       <script id='template' type='text/ractive'>
 
-      <div class="tip">
-        YO HERE IS SOME TEXT
-      </div>
+        <div class="tip">
+          YO HERE IS SOME TEXT
+        </div>
 
-      {{#each y15}}
-      {{#with month}}
-
-      {{#if @index < 8}}
-
-        <svg class='svg' width='30%' height='{{svgHeight}}'>
+        {{#each y15}} {{#with month}} {{#if @index
+        < 8}} <svg class='svg' width='30%' height='{{svgHeight}}'>
           <g class="month" transform="translate(0,0)">
-          //month title
-          <text x='{{ (daySize * 7)/2 }}' y='1em' text-anchor="middle" class="monthTitle">{{name}} </text>
-            //calendar section
-            {{#each days}}
-            //group the day and num
-            <g transform="translate(0,0)" class="daybox" on-mouseover="tooltip:{{day}}">
+            //month title
+            <text x='{{ (daySize * 7)/2 }}' y='1em' text-anchor="middle" class="monthTitle">{{name}} </text>
+            //calendar section {{#each days}} //group the day and num
+            <g transform="translate(0,0)" class="daybox" on-mouseover="tooltip:{{day}}" on-mouseout="removeTooltip">
 
-             <rect  x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="{{ colorScale( getShootings(day)) }}" stroke-width="2" class="day" />
-             <!-- shooting number -->
-             <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ getShootings(day) }}</text>
+              <rect x='{{ xscale(day) }}' y='{{ yscale(day) }}' width="{{daySize}}" height="{{daySize}}" stroke="black" fill="{{ colorScale( getShootings(day)) }}" stroke-width="2" class="day" />
+              <!-- shooting number -->
+              <text x='{{ xscale(day) + (daySize/2) }}' y="{{ yscale(day) + (daySize/2) }}" text-anchor="middle" dy="0.4em" class="dayNumber">{{ getShootings(day) }}</text>
             </g>
             {{/each}}
           </g>
-        </svg>
-      {{/if}}
-      {{/with}}
-      {{/each}}
+          </svg>
+          {{/if}} {{/with}} {{/each}}
       </script>
     </div>
 
@@ -207,7 +211,8 @@ div.tip::before {
   <script src="//localhost:35729/livereload.js"></script>
 
   <script src="data/shootings.js"></script>
-  <script src="main.js"></script>
+  <script src="js/year2015.js"></script>
+  <script src="js/main.js"></script>
 
 </body>
 
